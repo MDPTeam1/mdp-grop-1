@@ -1,0 +1,82 @@
+/* USER CODE BEGIN 0 */
+/*라즈베리파이에서 받은 신호를 구별하는 플래그변수*/
+uint8_t time = 0; /*자유시간*/
+uint8_t twix = 0; /*트윅스*/
+uint8_t snick = 0; /*스니커즈*/
+
+
+/* USER CODE END 0 */
+
+/**
+  * @brief  The application entry point.
+  * @retval int
+  */
+int main(void)
+{
+  /* USER CODE BEGIN 1 */
+
+  /* USER CODE END 1 */
+
+  /* MCU Configuration--------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
+
+  /* USER CODE BEGIN Init */
+
+  /* USER CODE END Init */
+
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* USER CODE BEGIN SysInit */
+
+  /* USER CODE END SysInit */
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_USART2_UART_Init();
+  MX_TIM1_Init();
+  MX_TIM3_Init();
+  /* USER CODE BEGIN 2 */
+  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+  /*모터 초깃값 500(90도)*/
+  htim3.Instance->CCR1 = 2500;
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+	  htim3.Instance->CCR1 = 2500;
+	  HAL_Delay(1000);
+	  /*라즈베리파이로부터 신호를 받음*/
+	  /*만약 신호가 자유시간이라면 time = 1*/
+	  /*만약 신호가 트윅스라면 twix = 1*/
+	  /*만약 신호가 스니커즈라면 snick = 1*/
+	  /*집게로 물건을 집어 올리는 코드*/
+	  /*만약 time == 1이라면 1번(0도) 위치로 이동*/
+	  if (time == 1) {
+		  htim3.Instance->CCR1 = 1500;
+		  HAL_Delay(1000);
+	  }
+	  /*만약 twix == 1이라면 2번(-45도) 위치로 이동*/
+	  if (twix == 1) {
+		  htim3.Instance->CCR1 = 1000;
+		  HAL_Delay(1000);
+	  }
+	  /*만약 snick == 1이라면 3번(-90도) 위치로 이동*/
+	  if (snick == 1) {
+		  htim3.Instance->CCR1 = 500;
+		  HAL_Delay(1000);
+	  }
+
+
+	  /*물건을 내려놓는 코드*/
+
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+  }
+  /* USER CODE END 3 */
+}
