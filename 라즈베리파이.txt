@@ -1,0 +1,25 @@
+1. remote 환경구축 (hotspot연결)
+
+2. Visual Studio Code Raspberry PI 개발환경 extension 
+
+3. raspberry pi <-> Nucleo Board Seral 통신
+(pc and raspberry pi ) , (pc and Nucleo), (raspberry pi and Nucleo)
+hercules                           hercules
+
+
+
+
+4. 라즈베리파이 설정
+
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf [enter]
+sudo reboot
+meister mac 확인 후 삭제 ctrl + x -> yes or no -> yes
+
+시작 -> 기본설정 -> 라즈베리파이 환경설정 -> Interface (SSH, VNC ON)                                  라즈베이파이 OS 설정: pi 사용자 raspberry OS(32bit
+ 
+노트북에서 vnc접속 -> VNC Viewer 프로그램 
+검색: VNC Viewer(realvnc사) install (64bit x86용)
+
+깔리고 나서 로그인 없이 사용 no sign in
+connect to 에 Raspberrypi IP (노트북 핫스팟)
+
